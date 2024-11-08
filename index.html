@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Natascha Haberl">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+
+        //using posttest loop so code executes at least once and will let user run through program again if they wish to
+        do {
+            let numbersArray = [];
+            let count = 0;
+
+            //taking user's input, converting it to integer and storing it in a string. Using counter "count" to keep track of how many numbers are entered
+            let input = prompt("Welcome to the calculator. Enter a number.")
+            count++;
+            numbersArray.push(Number(input));
+            console.log(count)
+            let playAgain = prompt(`You entered ${input}. Enter another y/n?`)
+
+            //as long as user enters y, will continue to take user's input, add it to the array, and increase the count
+            while (playAgain.toUpperCase() === "Y") {
+                input = prompt(`Enter another number.`)
+                count++;
+                numbersArray.push(Number(input));
+                playAgain = prompt(`You entered ${count} numbers, are there more y/n?`)
+            }
+
+            //setting a starting value whether math will be performed on numbers in the array or not
+            let total = numbersArray[0];
+
+            //if more than one number was entered, ask which mathematical operation the user would like to do on all the numbers that were entered
+            if (count > 1) {
+                let operation = prompt(`What Operation would you like to perform +, -, *, / ?`)
+                switch (operation) {
+                    case "+":
+                        for (let i = 0; i < numbersArray.length; i++) {
+                            total += numbersArray[i]
+                        }
+                        break;
+                    case "-":
+                        for (let i = 0; i < numbersArray.length; i++) {
+                            total -= numbersArray[i]
+                        }
+                        break;
+                    case "*":
+                        for (let i = 0; i < numbersArray.length; i++) {
+                            total *= numbersArray[i]
+                        }
+                        break;
+                    case "/":
+                        alert(`With this operation only 2 numbers are allowed. Dividing the first 2 numbers entered.`)
+                        total = numbersArray[0] / numbersArray[1];
+                        break;
+                    default:
+                        break;
+                }
+                startOver = prompt(`You entered ${count} numbers. Your answer is ${total}. Would you like to perform another calculation y/n?`)
+            }
+            else {
+                startOver = prompt(`You entered ${count} number. Your answer is ${total}. Would you like to perform another calculation y/n?`)
+            }
+        } while (startOver.toUpperCase() === "Y")
+        alert(`Thank you for using the calculator today, goodbye!`)
+    </script>
+</body>
+
+</html>
